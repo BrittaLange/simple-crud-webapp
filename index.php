@@ -3,8 +3,8 @@
 $db = require_once  '../../config/connect.php';
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 // Input Validations
-unset($errorMessage);
 $errorMessage = [];
+unset($errorMessage);
 if (isset($_POST['name'])) {
     // Validating name field.
     if (isset($_POST['name'])) {
@@ -27,7 +27,7 @@ if (isset($_POST['name'])) {
         $errorMessage['location'] = 'Location is required';
     }
     // Saving input in database when validation passes.
-    if (empty($errorMessage)) {
+    if (empty(($errorMessage)) && (isset($_POST['save']))) {
         try {
 
             // Prepared INSERT SQL statement.
@@ -62,15 +62,22 @@ if (isset($_POST['name'])) {
                 <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Location</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $sql = "SELECT name, location FROM customers";
+                $sql = "SELECT id, name, location FROM customers";
                 foreach ($db->query($sql) as $row) {
                     echo "<tr>";
-                    echo "<td>" . htmlspecialchars($row[0]) . "</td>";
                     echo "<td>" . htmlspecialchars($row[1]) . "</td>";
+                    echo "<td>" . htmlspecialchars($row[2]) . "</td>";
+                    echo '<td>';
+                    echo '<a href="index.php?edit=';
+                    echo $row[0] . '" class="btn btn-info" type="button">Edit</a>';
+                    echo '<a href="index.php?delete=';
+                    echo $row[0] . '" class="btn btn-danger" type="button">Delete</a>';
+                    echo '</td>';
                     echo "</tr>";
                 }
                 ?>
@@ -90,7 +97,7 @@ if (isset($_POST['name'])) {
                 <input type="text" name="location" class="form-control" id="inputLocation" maxlength="120">
                 <div id="locationRequired" class="form-text text-danger"><?= $errorMessage['location'] ?? ''; ?></div>
             </div>
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary" name="save">Save</button>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
