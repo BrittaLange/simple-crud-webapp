@@ -106,6 +106,16 @@ if (isset($_POST['name'])) {
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> Your data has been saved.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
                 <legend>List of customers</legend>
                 <table class="table table-bordered table-striped table-hover">
                     <thead>
