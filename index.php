@@ -2,6 +2,17 @@
 // Connect to database.
 $db = require_once  '../../config/connect.php';
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// Deleting a customer dataset.
+if (isset($_GET['delete'])) {
+    try {
+        $id = $_GET['delete'];
+        $sql = "DELETE FROM customers WHERE id = $id";
+        $affectedRows = $db->exec($sql);
+        echo $affectedRows . " datasets deleted.";
+    } catch (PDOException $e) {
+        echo "Deleting dataset failed. " . $e->getMessage();
+    }
+}
 // Input Validations
 $errorMessage = [];
 unset($errorMessage);
@@ -29,7 +40,6 @@ if (isset($_POST['name'])) {
     // Saving input in database when validation passes.
     if (empty(($errorMessage)) && (isset($_POST['save']))) {
         try {
-
             // Prepared INSERT SQL statement.
             $sql = "INSERT INTO customers (name, location) VALUES (:name, :location)";
             $stmt = $db->prepare($sql);
@@ -67,6 +77,7 @@ if (isset($_POST['name'])) {
             </thead>
             <tbody>
                 <?php
+                // Retrieve and display all customers in a table.
                 $sql = "SELECT id, name, location FROM customers";
                 foreach ($db->query($sql) as $row) {
                     echo "<tr>";
