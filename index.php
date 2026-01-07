@@ -5,7 +5,6 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 // Variable declaration.
 $update = false;
 $id = -1;
-$message = '';
 $messageType = '';
 // Deleting a customer dataset.
 if (isset($_GET['delete'])) {
@@ -88,10 +87,13 @@ if (isset($_POST['name'])) {
                 ':id' => $id
             ]);
             if ($stmt->rowCount() > 0) {
-                echo "Your changes have been saved.";
+                $message = "Your changes have been saved.";
+                $messageType = 'success';
             }
         } catch (PDOException $e) {
             echo "Update operation failed. " . $e->getMessage();
+            $message = "Update operation failed. Contact your admin.";
+            $messageType = 'danger';
         }
     }
 }
@@ -107,21 +109,21 @@ if (isset($_POST['name'])) {
 </head>
 
 <body>
+    <?php if (!(empty($message))): ?>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8">
-                <?php if (isset($message)): ?>
                 <div class="alert alert-<?= $messageType ?> alert-dismissible fade show" role="alert">
                     <?php 
-                    echo htmlspecialchars($message);
+                    echo htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
                     unset($message);
                     ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <?php endif ?>
             </div>
         </div>
     </div>
+    <?php endif ?>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8">
