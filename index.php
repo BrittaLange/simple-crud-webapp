@@ -19,7 +19,7 @@ if (isset($_GET['delete'])) {
         echo "Deleting dataset failed. " . $e->getMessage();
         $message = "Deleting customer failed.";
         $messageType = 'danger';
-}
+    }
 }
 // Start edit mode.
 if (isset($_GET['edit'])) {
@@ -75,6 +75,8 @@ if (isset($_POST['name'])) {
             $message = "New customer has been saved.";
             $messageType = 'success';
             echo $stmt->rowCount() . " row/s of data affected.";
+            unset($name);
+            unset($location);
         } catch (PDOException $e) {
             echo "Saving data did not work: " . $e->getMessage();
             $message = "New customer could not be saved.";
@@ -95,6 +97,8 @@ if (isset($_POST['name'])) {
             if ($stmt->rowCount() > 0) {
                 $message = "Your changes have been saved.";
                 $messageType = 'success';
+                unset($name);
+                unset($location);
             }
         } catch (PDOException $e) {
             echo "Update operation failed. " . $e->getMessage();
@@ -116,19 +120,19 @@ if (isset($_POST['name'])) {
 
 <body>
     <?php if (!(empty($message))): ?>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-8">
-                <div class="alert alert-<?= $messageType ?> alert-dismissible fade show" role="alert">
-                    <?php 
-                    echo htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
-                    unset($message);
-                    ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="alert alert-<?= $messageType ?> alert-dismissible fade show" role="alert">
+                        <?php
+                        echo htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
+                        unset($message);
+                        ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     <?php endif ?>
     <div class="container">
         <div class="row justify-content-center">
@@ -172,7 +176,7 @@ if (isset($_POST['name'])) {
                         <legend>Edit customer</legend>
                     <?php else: ?>
                         <legend>Create new customer</legend>
-                    <?php endif; ?>
+                    <?php endif ?>
                     <input type="text" hidden name="id" value="<?php echo $id ?>">
                     <div class="mb-3">
                         <label for="inputName" class="form-label">Name</label>
@@ -188,7 +192,7 @@ if (isset($_POST['name'])) {
                         <button type="submit" class="btn btn-info" name="update">Update</button>
                     <?php else: ?>
                         <button type="submit" class="btn btn-primary" name="save">Save</button>
-                    <?php endif; ?>
+                    <?php endif ?>
                 </form>
             </div>
         </div>
