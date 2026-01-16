@@ -1,0 +1,3 @@
+TestCaseID,CRUDOperation,Title,Preconditions,TestSteps,InputData,ExpectedResult,TestCaseStatus,AutomationStatus
+TC-CRUD-001,CREATE,Create customer with valid data,none,"Enter valid name, location and submit",Name=John Wayne; Location=Denver,Customer is saved successfully,Draft,not yet implemented
+TC-CRUD-002,CREATE,Create customer with empty name,none,"Leave name empty, enter location and submit",Name=; Location=Dallas,Customer ist not saved; An Error message is displayed,Draft,not yet implemented

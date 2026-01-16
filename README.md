@@ -63,6 +63,13 @@ environment**, while remaining transparent about learning outcomes and trade-off
 
 ---
 
+## Test Design
+
+Test cases are organized by scenario (CRUD, security)
+to improve readability and maintainability.
+
+---
+
 ## License
 
 This project is licensed under the MIT License.
