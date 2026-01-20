@@ -1,3 +1,18 @@
 TestCaseID,CRUDOperation,Title,Preconditions,TestSteps,InputData,ExpectedResult,TestCaseStatus,AutomationStatus
-TC-CRUD-001,CREATE,Create customer with valid data,none,"Enter valid name, location and submit",Name=John Wayne; Location=Denver,Customer is saved successfully,Draft,not yet implemented
-TC-CRUD-002,CREATE,Create customer with empty name,none,"Leave name empty, enter location and submit",Name=; Location=Dallas,Customer ist not saved; An Error message is displayed,Draft,not yet implemented
+TC-CRUD-001,CREATE,Create customer with valid data,none,"Enter valid name and location and submit",Name=John Wayne; Location=Denver,Customer is saved successfully,Draft,Not implemented
+TC-CRUD-002,CREATE,Create customer with empty name,none,"Leave name empty, enter location and submit",Name=; Location=Denver,Validation error is shown and customer is not saved,Draft,Not implemented
+TC-CRUD-003,CREATE,Create customer with empty location,none,"Enter name, leave location empty and submit",Name=John Wayne; Location=,Validation error is shown and customer is not saved,Draft,Not implemented
+TC-CRUD-004,CREATE,Create customer with name exceeding max length,none,"Enter too long name and submit",Name=VeryLongNameOverLimit; Location=Denver,Validation error is shown and customer is not saved,Draft,Not implemented
+
+TC-CRUD-005,READ,View customer list with existing records,At least one customer exists,"Open customer list page",none,Customer list is displayed with all saved customers,Draft,Not implemented
+TC-CRUD-006,READ,View customer details,Customer exists,"Open customer details view",none,Correct customer name and location are displayed,Draft,Not implemented
+TC-CRUD-007,READ,View empty customer list,No customers exist,"Open customer list page",none,Empty state message is displayed,Draft,Not implemented
+
+TC-CRUD-008,UPDATE,Update customer with valid data,Customer exists,"Edit customer, change name and location, submit",Name=Johnny Wayne; Location=Boulder,Customer data is updated successfully,Draft,Not implemented
+TC-CRUD-009,UPDATE,Update customer with empty name,Customer exists,"Clear name field and submit",Name=; Location=Denver,Validation error is shown and customer is not updated,Draft,Not implemented
+TC-CRUD-010,UPDATE,Update customer with empty location,Customer exists,"Clear location field and submit",Name=John Wayne; Location=,Validation error is shown and customer is not updated,Draft,Not implemented
+TC-CRUD-011,UPDATE,Cancel customer update,Customer exists,"Open edit form and cancel",none,No changes are saved and original data remains,Draft,Not implemented
+
+TC-CRUD-012,DELETE,Delete existing customer,Customer exists,"Click delete button and confirm",none,Customer is deleted successfully,Draft,Not implemented
+TC-CRUD-013,DELETE,Cancel customer deletion,Customer exists,"Click delete button and cancel confirmation",none,Customer is not deleted,Draft,Not implemented
+TC-CRUD-014,DELETE,Delete non-existing customer,Customer does not exist,"Attempt to access delete URL",none,Error message is shown and no data is affected,Draft,Not implemented
