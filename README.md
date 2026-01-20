@@ -67,6 +67,18 @@ environment**, while remaining transparent about learning outcomes and trade-off
 
 Test cases are organized by scenario (CRUD, security)
 to improve readability and maintainability.
+Test cases were initially generated with the help of AI based 
+on a test structure and scenarios designed by me, and were 
+then reviewed, refined, and organized to reflect QA practices 
+and testing strategies.
+
+---
+
+## AI-assisted workflow
+
+AI was used to accelerate the initial creation of test cases.
+All outputs were manually reviewed, adapted, and validated to
+ensure correctness, relevance, and maintainability.
 
 ---
 
