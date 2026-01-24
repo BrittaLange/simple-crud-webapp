@@ -63,6 +63,14 @@ environment**, while remaining transparent about learning outcomes and trade-off
 
 ---
 
+## Requirements
+
+The application had no formal written requirements,
+so test cases were derived from implicit requirements and expected user behavior,
+based on common usability standards and domain knowledge.
+
+---
+
 ## Test Design
 
 Test cases are organized by scenario (CRUD, security)
